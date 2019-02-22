@@ -9,11 +9,6 @@
 #include <vorbis/vorbisfile.h>
 #include <cstring>
 
-#pragma comment(lib,"libvorbisfile.lib")
-#pragma comment(lib,"vfilesystem.lib")
-#pragma comment(lib,"util.lib")
-#pragma comment(lib,"mathutil.lib")
-
 // Sound duration for mp3 files
 #if USOUND_MP3_SUPPORT_ENABLED == 1
 #ifdef _WIN32
