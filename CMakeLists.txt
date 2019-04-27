@@ -62,6 +62,7 @@ link_external_library(vfilesystem)
 link_external_library(libvorbis)
 link_external_library(libogg)
 
+add_include_dir(libogg_build)
 add_include_dir(MPAHeader)
 
 set(DEFINITIONS)
