@@ -11,6 +11,7 @@
 
 // Sound duration for mp3 files
 #if USOUND_MP3_SUPPORT_ENABLED == 1
+
 #ifdef _WIN32
 	template<class T,class V>
 		BOOL MoveFile(const T&,const V&) {return FALSE;};
@@ -19,6 +20,7 @@
 	#include <mpafile.h>
 	#include "MPAVFileStream.hpp"
 #endif
+
 #endif
 //
 
