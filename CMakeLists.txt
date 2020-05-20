@@ -63,13 +63,14 @@ link_external_library(libvorbis)
 link_external_library(libogg)
 
 add_include_dir(libogg_build)
-add_include_dir(MPAHeader)
+
+add_external_library(libvorbisfile)
 
 set(DEFINITIONS)
 
 ##### CONFIGURATION #####
 
-set(LIB_TYPE STATIC)
+set(LIB_TYPE SHARED)
 if(ENABLE_STATIC_LIBRARY_FLAG)
 	option(CONFIG_STATIC_LIBRARY "Build as static library?" OFF)
 endif()

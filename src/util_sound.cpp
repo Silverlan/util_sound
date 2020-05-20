@@ -17,7 +17,7 @@
 		BOOL MoveFile(const T&,const V&) {return FALSE;};
 	#include <atlstr.h>
 	#include <Windows.h>
-	#include <mpafile.h>
+	#include <mpaheader/mpafile.h>
 	#include "MPAVFileStream.hpp"
 #endif
 
