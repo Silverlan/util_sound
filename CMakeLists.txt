@@ -53,7 +53,6 @@ set(PROJ_NAME util_sound)
 project(${PROJ_NAME} CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-set(ENABLE_STATIC_LIBRARY_FLAG 0)
 # set(PRECOMPILED_HEADER "stdafx")
 
 link_external_library(sharedutils)
@@ -70,13 +69,7 @@ set(DEFINITIONS)
 
 ##### CONFIGURATION #####
 
-set(LIB_TYPE SHARED)
-if(ENABLE_STATIC_LIBRARY_FLAG)
-	option(CONFIG_STATIC_LIBRARY "Build as static library?" OFF)
-endif()
-if(DEFINED ${CONFIG_STATIC_LIBRARY} AND ${CONFIG_STATIC_LIBRARY})
-	set(LIB_TYPE STATIC)
-endif()
+set(LIB_TYPE STATIC)
 
 foreach(def IN LISTS DEFINITIONS)
 	add_definitions(-D${def})
