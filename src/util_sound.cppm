@@ -2,16 +2,13 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#ifndef __UTIL_SOUND_HPP__
-#define __UTIL_SOUND_HPP__
+module;
 
-#include "util_sound_definitions.hpp"
+#include "definitions.hpp"
 #include <string>
 
-namespace util {
-	namespace sound {
-		DLLUSND bool get_duration(const std::string path, float &duration);
-	};
-};
+export module pragma.audio.util;
 
-#endif
+export namespace pragma::audio::util {
+	DLLUSND bool get_duration(const std::string path, float &duration);
+};

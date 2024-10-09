@@ -2,7 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#include "util_sound.hpp"
+module;
+
 #include <fsys/filesystem.h>
 #include <fsys/ifile.hpp>
 #include <array>
@@ -11,7 +12,11 @@
 #if USOUND_MP3_SUPPORT_ENABLED == 1
 #include <mpafilestream.hpp>
 #include <mpafile.hpp>
+#endif
 
+module pragma.audio.util;
+
+#if USOUND_MP3_SUPPORT_ENABLED == 1
 struct MPHFile : public CMPAIFile {
 	MPHFile(std::unique_ptr<ufile::IFile> &&f) : m_file {std::move(f)} {}
 	virtual ~MPHFile() = default;
@@ -66,7 +71,7 @@ static bool get_ogg_sound_duration(VFilePtr f, float &duration)
 	return true;
 }
 
-bool util::sound::get_duration(const std::string path, float &duration)
+bool pragma::audio::util::get_duration(const std::string path, float &duration)
 {
 	duration = 0.f;
 	auto f = FileManager::OpenFile(path.c_str(), "rb");
