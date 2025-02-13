@@ -4,6 +4,7 @@
 
 module;
 
+#include "definitions.hpp"
 #include <fsys/filesystem.h>
 #include <fsys/ifile.hpp>
 #include <array>
