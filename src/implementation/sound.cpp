@@ -5,8 +5,6 @@
 module;
 
 #include "definitions.hpp"
-#include <fsys/filesystem.h>
-#include <fsys/ifile.hpp>
 #include <array>
 #include <vorbis/vorbisfile.h>
 #include <cstring>
@@ -16,6 +14,8 @@ module;
 #endif
 
 module pragma.audio.util;
+
+import pragma.filesystem;
 
 #if USOUND_MP3_SUPPORT_ENABLED == 1
 struct MPHFile : public CMPAIFile {
@@ -97,7 +97,7 @@ bool pragma::audio::util::get_duration(const std::string path, float &duration)
 			return true;
 		}
 		catch(CMPAException &e) {
-			UNUSED(e);
+			// UNUSED(e);
 			return false;
 		}
 #endif
