@@ -5,9 +5,7 @@
 module;
 
 #include "definitions.hpp"
-#include <array>
 #include <vorbis/vorbisfile.h>
-#include <cstring>
 #if USOUND_MP3_SUPPORT_ENABLED == 1
 #include <mpafilestream.hpp>
 #include <mpafile.hpp>

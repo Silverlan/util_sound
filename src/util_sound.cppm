@@ -5,9 +5,10 @@
 module;
 
 #include "definitions.hpp"
-#include <string>
 
 export module pragma.audio.util;
+
+export import std;
 
 export namespace pragma::audio::util {
 	DLLUSND bool get_duration(const std::string path, float &duration);
