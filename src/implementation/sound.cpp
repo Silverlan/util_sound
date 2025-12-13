@@ -27,32 +27,32 @@ struct MPHFile : public CMPAIFile {
 };
 #endif
 
-static void get_ogg_file_data(VFilePtr &f, vorbis_info **pInfo, OggVorbis_File &oggFile)
+static void get_ogg_file_data(pragma::fs::VFilePtr &f, vorbis_info **pInfo, OggVorbis_File &oggFile)
 {
 	ov_callbacks cb;
 	cb.close_func = [](void *dataSource) -> int {
-		auto &f = *static_cast<VFilePtr *>(dataSource);
+		auto &f = *static_cast<pragma::fs::VFilePtr *>(dataSource);
 		f.reset();
 		return 0;
 	};
 	cb.read_func = [](void *ptr, size_t size, size_t nmemb, void *dataSource) -> size_t {
-		auto &f = *static_cast<VFilePtr *>(dataSource);
+		auto &f = *static_cast<pragma::fs::VFilePtr *>(dataSource);
 		return f->Read(ptr, size * nmemb);
 	};
 	cb.seek_func = [](void *dataSource, ogg_int64_t offset, int whence) -> int {
-		auto &f = *static_cast<VFilePtr *>(dataSource);
+		auto &f = *static_cast<pragma::fs::VFilePtr *>(dataSource);
 		f->Seek(offset, whence);
 		return 0;
 	};
 	cb.tell_func = [](void *dataSource) -> long {
-		auto f = *static_cast<VFilePtr *>(dataSource);
+		auto f = *static_cast<pragma::fs::VFilePtr *>(dataSource);
 		return static_cast<long>(f->Tell());
 	};
 	ov_open_callbacks(&f, &oggFile, nullptr, 0, cb);
 	*pInfo = ov_info(&oggFile, -1);
 }
 
-static bool get_ogg_sound_duration(VFilePtr f, float &duration)
+static bool get_ogg_sound_duration(pragma::fs::VFilePtr f, float &duration)
 {
 	duration = 0.f;
 	vorbis_info *pInfo;
@@ -73,7 +73,7 @@ static bool get_ogg_sound_duration(VFilePtr f, float &duration)
 bool pragma::audio::util::get_duration(const std::string path, float &duration)
 {
 	duration = 0.f;
-	auto f = FileManager::OpenFile(path.c_str(), "rb");
+	auto f = fs::open_file(path.c_str(), fs::FileMode::Read | fs::FileMode::Binary);
 	if(f == nullptr)
 		return false;
 	std::array<char, 5> header;
@@ -87,7 +87,7 @@ bool pragma::audio::util::get_duration(const std::string path, float &duration)
 		return false;
 	if(ext == "mp3") {
 #if USOUND_MP3_SUPPORT_ENABLED == 1
-		auto mphFile = std::make_unique<MPHFile>(std::make_unique<fsys::File>(f));
+		auto mphFile = std::make_unique<MPHFile>(std::make_unique<fs::File>(f));
 		try {
 			auto *fstream = new CMPAFileStream {std::move(mphFile)}; // Will be deleted by destructor of CMPAFile
 			CMPAFile fInfo {fstream};
